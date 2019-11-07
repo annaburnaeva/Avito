@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class House {
     private int id;
     private int price;
+    private int rooms;
     private String district;
     private String underground;
 

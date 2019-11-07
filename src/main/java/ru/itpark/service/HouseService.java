@@ -17,6 +17,7 @@ public class HouseService {
                 resultSet -> (new House(
                         resultSet.getInt("id"),
                         resultSet.getInt("price"),
+                        resultSet.getInt("rooms"),
                         resultSet.getString("district"),
                         resultSet.getString("underground")
                 )));
