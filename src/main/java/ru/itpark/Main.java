@@ -32,9 +32,9 @@ public class Main {
         HouseService service = new HouseService();
         List<House> results1 = service.searchByDistrict("Кировский");
         System.out.println(results1);
-        List<House> housesByPriceAsc = service.sort((o1, o2) -> o1.getPrice() - o2.getPrice());
-        System.out.println(housesByPriceAsc);
-        List<House> housesByPriceDesc = service.sort((o1, o2) -> o2.getPrice() - o1.getPrice());
-        System.out.println(housesByPriceDesc);
+//        List<House> housesByPriceAsc = service.sort((o1, o2) -> o1.getPrice() - o2.getPrice());
+//        System.out.println(housesByPriceAsc);
+//        List<House> housesByPriceDesc = service.sort((o1, o2) -> o2.getPrice() - o1.getPrice());
+//        System.out.println(housesByPriceDesc);
     }
 }
