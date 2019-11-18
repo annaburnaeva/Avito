@@ -1,26 +1,25 @@
 package ru.itpark.service;
 
+import ru.itpark.exception.HouseNotFoundException;
 import ru.itpark.model.House;
+import ru.itpark.repository.HouseRepository;
 import ru.itpark.util.JdbcTemplate;
 
-import java.sql.SQLException;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class HouseService {
-    //    private Collection<House> houses;
-//
-    public HouseService() throws SQLException {
-        List<House> houses = JdbcTemplate.executeQuery(
-                "jdbc:sqlite:db.sqlite",
-                "SELECT id, price, district, underground FROM houses",
-                resultSet -> (new House(
-                        resultSet.getInt("id"),
-                        resultSet.getInt("price"),
-                        resultSet.getInt("rooms"),
-                        resultSet.getString("district"),
-                        resultSet.getString("underground")
-                )));
+    private final HouseRepository repository;
+
+    public HouseService(HouseRepository repository) {
+        this.repository = repository;
+    }
+
+
+    public House register(House house) {
+        if (house.getId() != 0) {
+            throw new IllegalArgumentException("House id must be 0 for registration");
+        }
+        return repository.save(house);
     }
 
     public List<House> searchByDistrict(String district) {
@@ -30,6 +29,7 @@ public class HouseService {
     }
 
     public List<House> searchByUnderground(String underground) {
+
         List<House> listByUnderground = new ArrayList<>();
         listByUnderground.removeIf(o -> !o.getUnderground().equals(underground));
         return listByUnderground;
@@ -46,7 +46,5 @@ public class HouseService {
         result.sort(comparator);
         return result;
     }
-
-
 }
 
